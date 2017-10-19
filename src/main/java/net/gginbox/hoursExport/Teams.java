@@ -20,6 +20,7 @@ import java.io.IOException;
  * Scan the Excel hours class export file and build structure of People to Teams.
  * 
  * This uses the Apache POI (v3.17) for all Excel related processing.
+ * TODO Should really move all the Excel-related stuff to its own class
  * 
  * @author Gordon Galligher - gorpong@gginbox.net
  */
@@ -36,8 +37,10 @@ public class Teams {
 	/**
 	 * Construct the Teams object for parsing the {@code file} to get hours.
 	 * 
-	 * @param file	The file to parse (in Excel format)
-	 * @param cfg	The configuration object for grabbing things like column name
+	 * @param file	
+	 * 		The file to parse (in Excel format)
+	 * @param cfg	
+	 * 		The configuration object for grabbing things like column name
 	 */
 	public Teams(String file, ConfigProperties cfg) {
 		fileName = file;
@@ -51,10 +54,14 @@ public class Teams {
 	/**
 	 * Parse the Excel file for this instance and create the data structure holding the information.
 	 * 
-	 * @throws IOException					Error when closing workbook 
-	 * @throws InvalidFormatException 		Error when creating workbook based on file
-	 * @throws EncryptedDocumentException 	Workbook in file is encrypted
-	 * @throws IllegalStateException		Workbook doesn't have columns we're looking to find
+	 * @throws IOException
+	 * 			Error when closing workbook 
+	 * @throws InvalidFormatException
+	 *  		Error when creating workbook based on file
+	 * @throws EncryptedDocumentException
+	 * 		 	Workbook in file is encrypted
+	 * @throws IllegalStateException
+	 * 			Workbook doesn't have columns we're looking to find
 	 * 
 	 */
 	public void parseExcel() throws EncryptedDocumentException, InvalidFormatException, IOException {
@@ -108,7 +115,8 @@ public class Teams {
 	/**
 	 * Get the list of teams that we've parsed as an {@code ArrayList<Integer>}.
 	 * 
-	 * @return	The list of sorted teams
+	 * @return
+	 * 		The list of sorted teams
 	 */
 	public ArrayList<Integer> getTeams() {
 		ArrayList<Integer> teams = new ArrayList<Integer>();
@@ -121,8 +129,10 @@ public class Teams {
 	 * Get the list of {@code Students} for a specific team, sorted by the number
 	 * of hours worked in descending order (e.g., most hours to least).
 	 * 
-	 * @param team	The team from which to get the sorted list of {@code Students}
-	 * @return		The sorted list of {@code Students} (or null if error)
+	 * @param team
+	 * 		The team from which to get the sorted list of {@code Students}
+	 * @return
+	 * 		The sorted list of {@code Students} (or null if error)
 	 */
 	public ArrayList<Student> getHoursByTeam(int team) {
 		try {
@@ -147,9 +157,12 @@ public class Teams {
 	/**
 	 * Find the specific position of the column containing the header label we want.
 	 * 
-	 * @param sheet		The sheet to look in
-	 * @param colSearch	The string of the column we're looking for (-1 if not found)
-	 * @return			The column number where the column is found
+	 * @param sheet
+	 * 		The sheet to look in
+	 * @param colSearch
+	 * 		The string of the column we're looking for (-1 if not found)
+	 * @return
+	 * 		The column number where the column is found
 	 */
 	private int findColumn(Sheet sheet, String colSearch) {
 		int column = -1;	

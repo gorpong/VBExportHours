@@ -70,11 +70,16 @@ public class Output {
 	 * file and finalizes the configuration of the fonts and formats for the various
 	 * cell components.
 	 * 
-	 * @param fname		The output file name (the new Excel file to create)
-	 * @param cfg		The configuration object (in case we need configuration bits)
-	 * @param low		The low water mark for hours that are too low
-	 * @param hi		The high water mark for hours that are too high
-	 * @return Output	Factory method, creates new {@code Output} object and returns it
+	 * @param fname
+	 * 		The output file name (the new Excel file to create)
+	 * @param cfg
+	 * 		The configuration object (in case we need configuration bits)
+	 * @param low
+	 * 		The low water mark for hours that are too low
+	 * @param hi
+	 * 		The high water mark for hours that are too high
+	 * @return Output
+	 * 		Factory method, creates new {@code Output} object and returns it
 	 */
 	public static Output initialize(String fname, ConfigProperties cfg, double low, double hi) {
 		Output out = new Output(fname, cfg);
@@ -98,7 +103,8 @@ public class Output {
 	 * Write out and close the Excel file. Throws exceptions if there is an error
 	 * writing or formatting the sheet.
 	 * 
-	 * @throws IOException Error writing/closing file
+	 * @throws IOException
+	 * 		Error writing/closing file
 	 * 
 	 */
 	public void close() throws IOException {
@@ -184,8 +190,10 @@ public class Output {
 	/**
 	 * Create the worksheet passed as type and put the data into it.
 	 * 
-	 * @param teams	The list of teams
-	 * @param type	The sheet type we are to create based on enum
+	 * @param teams
+	 * 		The list of teams
+	 * @param type
+	 * 		The sheet type we are to create based on enum
 	 */
 	public void createSheet(Teams teams, SheetType type) {
 		Sheet sheet;
@@ -302,10 +310,14 @@ public class Output {
 	}
 	
 	/**
-	 * Create a mapping of certain styles
+	 * Create a mapping of certain styles to make it easier to use those styles.
+	 * This was taken from the example code for the Apache POI project and then 
+	 * modified as needed for this project.
 	 * 
-	 * @param wb	The workbook object
-	 * @return The mapping of styles
+	 * @param wb
+	 * 		The workbook object
+	 * @return
+	 * 		The mapping of styles
 	 */
 	private static Map<String, CellStyle> createStyles(Workbook wb) {
 		Map<String, CellStyle> styles = new HashMap<>();
@@ -452,6 +464,15 @@ public class Output {
 		return styles;
 	}
 	
+	/**
+	 * Helper method for the {@code createStyles} method above.  This was
+	 * taken directly from example code included in the Apache POI project.
+	 * Just creates a cell style that has a thin, black box border.
+	 * 
+	 * @param wb
+	 * 		The workbook for which this style should be created.
+	 * @return
+	 */
 	private static CellStyle createBorderedStyle(Workbook wb){
 		BorderStyle thin = BorderStyle.THIN;
 		short black = IndexedColors.BLACK.getIndex();

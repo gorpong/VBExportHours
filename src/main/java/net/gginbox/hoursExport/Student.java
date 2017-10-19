@@ -7,8 +7,8 @@ import java.util.regex.Pattern;
  * Class that contains the people-specific aspects of the exported hours listing.
  * This is a data structure for a person in the Excel export file.  The concept
  * of the team that they are on is a higher-order function to be handled by
- * either another class that will include People as one of its attributes or
- * by just manually creating something like a HashMap that has People as one of
+ * either another class that will include Student as one of its attributes or
+ * by just manually creating something like a HashMap that has Student as one of
  * its elements.  This implements the Comparable interface so that we can use
  * the lambda functions to quickly sort the people based on the hours they
  * worked.
@@ -22,7 +22,7 @@ public class Student implements Comparable<Student> {
 	 * Class variables
 	 */
 	
-	private static HashMap<String, Student> _people = new HashMap<String, Student>();
+	private static HashMap<String, Student> _students = new HashMap<String, Student>();
 	
 	/*
 	 * Instance variables
@@ -34,12 +34,12 @@ public class Student implements Comparable<Student> {
 	
 		
 	/**
-	 * Private constructor, use the getPerson() factory method instead.
+	 * Private constructor, use the getStudent() factory method instead.
 	 * 
 	 * @param name
-	 * 		The person's full name (or whatever is in the file)
+	 * 		The student's full name (or whatever is in the file)
 	 * @param id
-	 * 		The person's ID (this is the only value on parent's report)
+	 * 		The student's ID (this is the only value on parent's report)
 	 * @param hours
 	 * 		The hours for that week.
 	 */
@@ -61,13 +61,13 @@ public class Student implements Comparable<Student> {
 	}
 	
 	/**
-	 * Factory method to get a person object, if one for that id exists, then add
+	 * Factory method to get a Student object, if one for that id exists, then add
 	 * the hours to its existing hours, otherwise create a new one, and then return it.
 	 * 
 	 * @param name
-	 * 		The name of the person
+	 * 		The name of the student
 	 * @param id
-	 * 		The ID of the person (must be unique across all Student instances)
+	 * 		The ID of the student (must be unique across all Student instances)
 	 * @param hours
 	 * 		The hours for that particular time period
 	 * @return
@@ -75,12 +75,12 @@ public class Student implements Comparable<Student> {
 	 */
 	public static Student getStudent(String name, String id, double hours) {
 		Student person;
-		if ( _people.containsKey(id) ) {
-			person = _people.get(id);
+		if ( _students.containsKey(id) ) {
+			person = _students.get(id);
 			person.hours += hours;
 		} else {
 			person = new Student(name, id, hours);
-			_people.put(id,  person);
+			_students.put(id,  person);
 		}
 		return person;
 	}
@@ -108,7 +108,7 @@ public class Student implements Comparable<Student> {
 	}
 
 	/**
-	 * Pretty-print the structure in the form:  [lastname,firstname:id:hours]
+	 * Pretty-print the structure in the form:  [firstname,lastname:id:hours]
 	 */
 	public String toString() {
 		return "[" + fname + " " + lname + ":" + id + ":" + hours + "]";
