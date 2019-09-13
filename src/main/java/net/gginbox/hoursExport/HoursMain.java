@@ -83,8 +83,8 @@ public class HoursMain {
 		Calendar date = Calendar.getInstance();
 		String datestr = String.format("%02d/%02d/%04d %02d:%02d %s",  date.get(Calendar.MONTH)+1, 
 				date.get(Calendar.DATE), date.get(Calendar.YEAR), 
-				date.get(Calendar.HOUR), date.get(Calendar.MINUTE), 
-				date.get(Calendar.AM_PM) == 1 ? "PM" : "AM");
+				date.get(Calendar.HOUR) + date.get(Calendar.HOUR) == 0 ? 12 : 0,
+				date.get(Calendar.MINUTE), date.get(Calendar.AM_PM) == 1 ? "PM" : "AM");
 		System.out.println("Processing starting at:  " + datestr);
 		String inputFile  = cmd.getOptionValue("i", config.getConfig("inputFile"));
 		System.out.println("Reading from file:  " + inputFile);
@@ -99,7 +99,6 @@ public class HoursMain {
 		} catch (InvalidFormatException e) {
 			System.out.println("Not all columns present in " + inputFile + ": " + e.getMessage());
 			System.exit(1);
-			e.printStackTrace();
 		}
 		int numStudents = 0;
 		int numTeams = 0;
@@ -128,8 +127,8 @@ public class HoursMain {
 		date = Calendar.getInstance();
 		datestr = String.format("%02d/%02d/%04d %02d:%02d %s",  date.get(Calendar.MONTH)+1, 
 				date.get(Calendar.DATE), date.get(Calendar.YEAR), 
-				date.get(Calendar.HOUR), date.get(Calendar.MINUTE), 
-				date.get(Calendar.AM_PM) == 1 ? "PM" : "AM");
+				date.get(Calendar.HOUR) + date.get(Calendar.HOUR) == 0 ? 12 : 0,
+				date.get(Calendar.MINUTE), date.get(Calendar.AM_PM) == 1 ? "PM" : "AM");
 		System.out.println("Processing Complete at:  " + datestr);
 		System.out.println("File Created:  " + outputFile);
 	}
