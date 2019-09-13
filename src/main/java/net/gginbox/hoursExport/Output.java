@@ -97,7 +97,7 @@ public class Output {
 		out.date = Calendar.getInstance();
 		out.datestr = String.format("%02d/%02d/%04d %02d:%02d %s",  out.date.get(Calendar.MONTH)+1, 
 				out.date.get(Calendar.DATE), out.date.get(Calendar.YEAR), 
-				out.date.get(Calendar.HOUR) + out.date.get(Calendar.HOUR) == 0 ? 12 : 0, 
+				out.date.get(Calendar.HOUR) == 0 ? 12 : out.date.get(Calendar.HOUR),
 				out.date.get(Calendar.MINUTE), out.date.get(Calendar.AM_PM) == 1 ? "PM" : "AM");
 		return out;
 	}
@@ -216,7 +216,7 @@ public class Output {
 			sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, this.maxCoachesCol));
 			for (int i = 0; i <= this.maxCoachesCol; i++) {
 				Cell hc = headerRow.createCell(i);
-				hc.setCellStyle(styles.get("header"));;
+				hc.setCellStyle(styles.get("header"));
 			}
 			Cell cell = headerRow.getCell(0);
 			cell.setCellValue("COACHES Hours Report " + datestr);
@@ -271,7 +271,7 @@ public class Output {
 			sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, this.maxParentsCol));
 			for (int i = 0; i <= this.maxParentsCol; i++) {
 				Cell hc = headerRow.createCell(i);
-				hc.setCellStyle(styles.get("header"));;
+				hc.setCellStyle(styles.get("header"));
 			}
 			Cell cell = headerRow.getCell(0);
 			cell.setCellValue("PARENTS Hours Report " + datestr);
