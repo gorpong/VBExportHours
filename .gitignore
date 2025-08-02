@@ -1,26 +1,52 @@
+# Maven build directory
 /target/
-# Compiled class file
-*.class
 
-# Log file
+# Maven local repository (optional, usually not needed)
+/.mvn/
+/**/.mvn/
+
+# Logs
 *.log
 
-# BlueJ files
-*.ctxt
+# Compiled class files
+*.class
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
+# Package files
 *.jar
 *.war
 *.ear
-*.zip
-*.tar.gz
-*.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+# IDE files
+## Eclipse
+.classpath
+.project
+.settings/
+
+## IntelliJ IDEA
+*.iml
+.idea/
+out/
+
+## NetBeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# VS Code
+.vscode/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~.nib
 
 # sensitive files to never send up
 TeamsHours-Coaches.pdf
