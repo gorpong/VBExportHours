@@ -43,6 +43,7 @@ public class Student implements Comparable<Student> {
 	 * @param hours
 	 * 		The hours for that week.
 	 */
+/*
 	private Student(String name, String id, double hours) {
 		Pattern regexComma = Pattern.compile(".*, .*");
 		Pattern regexSpace = Pattern.compile(".* .*");
@@ -58,6 +59,25 @@ public class Student implements Comparable<Student> {
 			this.lname = name;
 			this.fname = "";
 		}
+	}
+*/
+	private Student(String name, String id, double hours) {
+	    Pattern regexComma = Pattern.compile(".*, .*");
+	    Pattern regexSpace = Pattern.compile(".* .*");
+	    this.id = id;
+	    this.hours = hours;
+	    if (regexComma.matcher(name).matches()) {
+	        String[] parts = name.split(", ");
+	        this.lname = parts[0].trim();
+	        this.fname = parts[1].trim();
+	    } else if (regexSpace.matcher(name).matches()) {
+	        String[] parts = name.split(" ");
+	        this.lname = parts[1].trim();
+	        this.fname = parts[0].trim();
+	    } else {
+	        this.lname = name;
+	        this.fname = "";
+	    }
 	}
 	
 	/**
@@ -107,6 +127,9 @@ public class Student implements Comparable<Student> {
 		else return 1;
 	}
 
+	public static void clearStudents() {
+		_students.clear();
+	}
 	/**
 	 * Pretty-print the structure in the form:  [firstname,lastname:id:hours]
 	 */

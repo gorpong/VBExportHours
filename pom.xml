@@ -11,17 +11,78 @@
   <url>http://www.viperbots.org/</url>
 
   <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <java.version>1.8</java.version>
+	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	<maven.compiler.source>17</maven.compiler.source>
+	<maven.compiler.target>17</maven.compiler.target>
   </properties>
-  
-    <dependencies>
+
+	<dependencyManagement>
+	  <dependencies>
+		<dependency>
+		<groupId>net.bytebuddy</groupId>
+		<artifactId>byte-buddy</artifactId>
+		<version>1.15.4</version>
+		</dependency>
+		<dependency>
+		<groupId>net.bytebuddy</groupId>
+		<artifactId>byte-buddy-agent</artifactId>
+		<version>1.15.4</version>
+		</dependency>
+	  </dependencies>
+	</dependencyManagement>
+
+  <dependencies>
+
+    <!-- Mockito dependencies -->
+	<dependency>
+		<groupId>net.bytebuddy</groupId>
+		<artifactId>byte-buddy</artifactId>
+		<version>1.15.11</version>
+		<scope>test</scope>
+	</dependency>
+	<dependency>
+		<groupId>net.bytebuddy</groupId>
+		<artifactId>byte-buddy-agent</artifactId>
+		<version>1.15.11</version>
+		<scope>test</scope>
+	</dependency>
+
+	<dependency>
+		<groupId>org.mockito</groupId>
+		<artifactId>mockito-core</artifactId>
+		<version>5.18.0</version>
+		<scope>test</scope>
+	</dependency>
+
+	<dependency>
+		<groupId>org.mockito</groupId>
+		<artifactId>mockito-junit-jupiter</artifactId>
+		<version>5.18.0</version>
+		<scope>test</scope>
+	</dependency>
+
+<!--
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
+	<groupId>org.mockito</groupId>
+	<artifactId>mockito-junit-jupiter</artifactId>
+	<version>5.14.2</version>
+	<scope>test</scope>
     </dependency>
+-->
+    <!-- JUnit Jupiter API and Engine -->
+    <dependency>
+	<groupId>org.junit.jupiter</groupId>
+    	<artifactId>junit-jupiter-api</artifactId>
+	<version>5.11.3</version>
+    	<scope>test</scope>
+    </dependency>
+    <dependency>
+	<groupId>org.junit.jupiter</groupId>
+    	<artifactId>junit-jupiter-engine</artifactId>
+   	<version>5.11.3</version>
+    	<scope>test</scope>
+    </dependency>
+
     <dependency>
     	<groupId>org.apache.poi</groupId>
     	<artifactId>poi</artifactId>
@@ -41,16 +102,24 @@
   <description>Export the hours from fingerprint scanner (.xls file) and generate a new Excel sheet (.xlsx) with two worksheets, one for the coaches that has names and one for the parents/students with just the student ID's.</description>
   <build>
   	<plugins>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-surefire-plugin</artifactId>
+			<version>3.1.2</version> <!-- or latest GA -->
+			<configuration>
+				<argLine>-XX:+EnableDynamicAgentLoading</argLine>
+				<!-- optional: explicitly select Jupiter if you have mixed engines -->
+				<includes>
+				<include>**/*Test*.java</include>
+				</includes>
+			</configuration>
+		</plugin>
   		<plugin>
   			<groupId>
   				org.apache.maven.plugins
   			</groupId>
   			<artifactId>maven-compiler-plugin</artifactId>
-  			<version>3.7.0</version>
-  			<configuration>
-  				<source>1.8</source>
-  				<target>1.8</target>
-  			</configuration>
+  			<version>3.8.1</version>
  		</plugin>
 	 	<plugin>
 	    	<groupId>org.apache.maven.plugins</groupId>

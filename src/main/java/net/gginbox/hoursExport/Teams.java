@@ -1,7 +1,8 @@
 package net.gginbox.hoursExport;
 
 import java.util.HashMap;
-
+import java.util.List;
+import java.util.Map;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
@@ -25,7 +26,7 @@ import java.io.IOException;
  * @author Gordon Galligher - gorpong@gginbox.net
  */
 public class Teams {
-	private HashMap<Integer, ArrayList<Student>> _teams = new HashMap<Integer, ArrayList<Student>>();
+	private HashMap<Integer, ArrayList<Student>> _teams = new HashMap<>();
 	private String fileName;
 	private ConfigProperties config;
 	
@@ -154,6 +155,10 @@ public class Teams {
 		}
 	}
 
+	public Map<Integer, List<Student>> getTeamsData() {
+		return new HashMap<>(_teams); 
+	}
+
 	/**
 	 * Find the specific position of the column containing the header label we want.
 	 * 
@@ -164,7 +169,11 @@ public class Teams {
 	 * @return
 	 * 		The column number where the column is found
 	 */
-	private int findColumn(Sheet sheet, String colSearch) {
+	public int findColumn(Sheet sheet, String colSearch) {
+       		 return findColumnInternal(sheet, colSearch);
+	}
+    
+	private int findColumnInternal(Sheet sheet, String colSearch) {
 		int column = -1;	
 		
 		Row row0 = sheet.getRow(0);
