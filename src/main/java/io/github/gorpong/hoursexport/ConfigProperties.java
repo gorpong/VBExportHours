@@ -1,4 +1,4 @@
-package net.gginbox.hoursExport;
+package io.github.gorpong.hoursexport;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -19,7 +19,7 @@ import java.util.Properties;
  * working directory.  Not as useful as a full class-path search, but at least
  * this works.
  *
- * @author Gordon Galligher - gorpong@gginbox.net
+ * @author Gordon Galligher - gorpong@gmail.com
  */
 public class ConfigProperties {
     private HashMap<String, String> propList = new HashMap<String, String>();

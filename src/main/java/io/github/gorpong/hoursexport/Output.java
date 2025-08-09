@@ -1,4 +1,4 @@
-package net.gginbox.hoursExport;
+package io.github.gorpong.hoursexport;
 
 import java.lang.String;
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * 
  * Currently uses the Apache POI (v3.17) for all of the Excel-related stuff.
  * 
- * @author Gordon Galligher - gorpong@gginbox.net
+ * @author Gordon Galligher - gorpong@gmail.com
  *
  */
 public class Output {

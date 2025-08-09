@@ -1,4 +1,4 @@
-package net.gginbox.hoursExport;
+package io.github.gorpong.hoursexport;
 
 import java.util.HashMap;
 import java.util.regex.Pattern;
@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
  * the lambda functions to quickly sort the people based on the hours they
  * worked.
  * 
- * @author Gordon Galligher - gorpong@gginbox.net
+ * @author Gordon Galligher - gorpong@gmail.com
  *
  */
 public class Student implements Comparable<Student> {

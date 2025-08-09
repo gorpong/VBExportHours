@@ -1,4 +1,4 @@
-package net.gginbox.hoursExport;
+package io.github.gorpong.hoursexport;
 
 import java.util.logging.ConsoleHandler;
 import java.util.logging.LogRecord;
@@ -25,7 +25,7 @@ class StudentTest {
     static {
 	    ConsoleHandler handler = new ConsoleHandler();
 	    handler.setFormatter(new SimpleFormatterWithoutDate());
-	    logger.addHandler(handler);
+	    //logger.addHandler(handler);
 	    logger.setUseParentHandlers(false);
     }
 
