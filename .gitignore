@@ -49,11 +49,9 @@ Thumbs.db
 *~.nib
 
 # sensitive files to never send up
-TeamsHours-Coaches.pdf
-TeamsHours-Parents.pdf
-TeamsHours.pdf
-TeamsHours.xls
-TeamsHours.xlsx
-hoursExport.xls
-hoursExport.xlsx
+TeamsHours*.pdf
+TeamsHours*.xls
+TeamsHours*.xlsx
+hoursExport*.xls
+hoursExport*.xlsx
 

@@ -1,4 +1,4 @@
-package net.gginbox.hoursExport;
+package io.github.gorpong.hoursexport;
 
 import java.io.File;
 import java.io.IOException;

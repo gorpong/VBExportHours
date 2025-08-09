@@ -1,11 +1,13 @@
-package net.gginbox.hoursExport;
+package io.github.gorpong.hoursexport;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import org.apache.commons.cli.*;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import net.gginbox.hoursExport.Output.SheetType;
+
+import io.github.gorpong.hoursexport.Output.SheetType;
+
 import java.util.Calendar;
 
 /**
@@ -14,7 +16,7 @@ import java.util.Calendar;
  * This is to for the Vandegrift ViperBots FTC Robotics program at Vandegrift
  * High School in Austin, Texas.
  *  
- * @author Gordon Galligher - gorpong@gginbox.net
+ * @author Gordon Galligher - gorpong@gmail.com
  *
  */
 public class HoursMain {

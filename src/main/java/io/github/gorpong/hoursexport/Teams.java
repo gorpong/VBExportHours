@@ -1,4 +1,4 @@
-package net.gginbox.hoursExport;
+package io.github.gorpong.hoursexport;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +23,7 @@ import java.io.IOException;
  * This uses the Apache POI (v3.17) for all Excel related processing.
  * TODO Should really move all the Excel-related stuff to its own class
  * 
- * @author Gordon Galligher - gorpong@gginbox.net
+ * @author Gordon Galligher - gorpong@gmail.com
  */
 public class Teams {
 	private HashMap<Integer, ArrayList<Student>> _teams = new HashMap<>();
