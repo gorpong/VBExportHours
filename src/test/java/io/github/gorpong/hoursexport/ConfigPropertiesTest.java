@@ -97,6 +97,20 @@ public class ConfigPropertiesTest {
                 fail("Unexpected exception: " + e.getMessage());
             }
         }
+
+        @Test
+        public void testSaveDefaultFile() {
+            try {
+                config.getPropValues();
+                config.setConfig("key4", "value4");
+                assertThrows(
+                    IllegalStateException.class, 
+                    () -> config.saveProperties()
+                );
+            } catch (Exception e) {
+                fail("Unexpected exception: " + e.getMessage());
+            }
+        }
     }
 
     @Nested

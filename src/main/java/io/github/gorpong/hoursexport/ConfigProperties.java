@@ -22,6 +22,12 @@ import java.util.Properties;
  * @author Gordon Galligher - gorpong@gmail.com
  */
 public class ConfigProperties {
+    private enum Source { NONE, FILESYSTEM, CLASSPATH }
+
+    private Source source = Source.NONE;
+    private Path loadedPath = null; // Filesystem
+    private String loadedResource = null; // Classpath
+
     private HashMap<String, String> propList = new HashMap<String, String>();
     private String defPropFname = "VBHoursExport.properties";
     private Properties prop;
@@ -47,23 +53,31 @@ public class ConfigProperties {
      * 		Can't find properties file
      */
     public void getPropValues(String propFileName) throws IOException, FileNotFoundException {
-        Path path = FileSystems.getDefault().getPath(propFileName);
         InputStream stream = null;
 
         try {
-            stream = Files.newInputStream(path);
-            if (stream != null) {
-                prop.load(stream);
+            Path path = FileSystems.getDefault().getPath(propFileName);
+            if (Files.exists(path)) {
+                stream = Files.newInputStream(path);
+                source = Source.FILESYSTEM;
+                loadedPath = path;
             } else {
-                throw new FileNotFoundException("Cannot find properties file <" + propFileName + "> in ClassPath.");
+                // fallback to classpath resource
+                stream = getClass().getClassLoader().getResourceAsStream(propFileName);
+                if (stream == null) {
+                    throw new FileNotFoundException("Cannot find properties file <" + propFileName + "> in ClassPath.");
+                }
+                source = Source.CLASSPATH;
+                loadedResource = propFileName;
             }
+
+            prop.load(stream);
+            propList.clear(); // ensure fresh
             for (Object key : prop.keySet()) {
                 propList.put((String) key, (String) prop.get(key));
             }
         } catch (NoSuchFileException e) {
             throw new FileNotFoundException("Cannot find properties file <" + propFileName + "> in ClassPath.");
-        } catch (Exception e) {
-            System.out.println("Exception:  " + e);
         } finally {
             if (stream != null) {
                 stream.close();
@@ -142,12 +156,21 @@ public class ConfigProperties {
     }
 
     /**
-     * Save the properties to the default properties file.
+     * Save the properties to the default properties file, only if it was a file.
      *
+     * @throws IllegalStateException
+     *      Request to save when it was found on the classpath
      * @throws IOException
      * 		Problem closing/writing file
      */
     public void saveProperties() throws IOException {
-        this.saveProperties(defPropFname);
+        if ( source == Source.FILESYSTEM && loadedPath != null )
+            this.saveProperties(defPropFname);
+        else {
+            throw new IllegalStateException(
+                "Properties were loaded from a classpath resource (" + loadedResource + 
+                "); provide an explicit filesystem path to save to."
+            );
+        }
     }
 }
