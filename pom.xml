@@ -139,21 +139,36 @@
 				</execution>
 			</executions>
 		</plugin>	
-<!--   		<plugin>
-  			<groupId>org.apache.maven.plugins</groupId>
-  			<artifactId>maven-jar-plugin</artifactId>
-  			<version>3.0.2</version>
-  			<configuration>
-  				<archive>
-  					<manifest>
-  						<addClasspath>true</addClasspath>
-  						<classpathPrefix>libs/</classpathPrefix>
-  						<mainClass>net.gginbox.hoursExport.HoursMain</mainClass>
-  					</manifest>
-  				</archive>
-  			</configuration>
-  		</plugin>
--->  	
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-javadoc-plugin</artifactId>
+			<version>3.11.2</version> <!-- Use latest version -->
+			<configuration>
+				<outputDirectory>${project.basedir}/doc</outputDirectory>
+			</configuration>
+		</plugin>
+		<!-- Ant Plugin to move files -->
+		<plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-antrun-plugin</artifactId>
+		<version>3.0.0</version>
+		<executions>
+			<execution>
+			<phase>verify</phase>
+			<goals>
+				<goal>run</goal>
+			</goals>
+			<configuration>
+				<target>
+				<move todir="${project.basedir}/doc">
+					<fileset dir="${project.basedir}/doc/apidocs"/>
+				</move>
+				<delete dir="${project.basedir}/doc/apidocs"/>
+				</target>
+			</configuration>
+			</execution>
+		</executions>
+		</plugin>
    		<plugin>
 		    <groupId>org.apache.maven.plugins</groupId>
 		    <artifactId>maven-assembly-plugin</artifactId>
